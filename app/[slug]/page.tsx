@@ -37,7 +37,9 @@ export default async function JourneyPage({ params }: PageProps) {
     notFound();
   }
 
-  const relatedPages = journeyPages.filter((entry) => entry.slug !== slug).slice(0, 3);
+  const relatedPages = journeyPages
+    .filter((entry) => entry.slug !== slug)
+    .slice(0, 3);
 
   return (
     <div className="page-stack">
@@ -121,6 +123,7 @@ export default async function JourneyPage({ params }: PageProps) {
             <EnquiryForm
               defaultEnquiryType={page.enquiryType}
               formName={page.formName}
+              sourcePage={`/${page.slug}`}
               submitLabel={page.submitLabel}
             />
           </article>
