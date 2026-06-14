@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { getJourneyPage, journeyPages } from "@/lib/site-content";
 
 type PageProps = {
@@ -40,6 +39,7 @@ export default async function JourneyPage({ params }: PageProps) {
   const relatedPages = journeyPages
     .filter((entry) => entry.slug !== slug)
     .slice(0, 3);
+  const enquiryHref = `/enquiry?type=${encodeURIComponent(page.enquiryType)}&source=${encodeURIComponent(`/${page.slug}`)}`;
 
   return (
     <div className="page-stack">
@@ -66,8 +66,8 @@ export default async function JourneyPage({ params }: PageProps) {
             out through Resend from info@kmfinancing.com. No service role key is
             exposed to the frontend.
           </p>
-          <Link className="text-link" href="/#forms">
-            Prefer a general contact form?
+          <Link className="text-link" href={enquiryHref}>
+            Open the main enquiry page
           </Link>
         </aside>
       </section>
@@ -113,19 +113,20 @@ export default async function JourneyPage({ params }: PageProps) {
 
         <aside className="content-sidebar">
           <article className="panel panel--form">
-            <p className="eyebrow">Start here</p>
-            <h2>{page.label} enquiry form</h2>
+            <p className="eyebrow">Ready to enquire?</p>
+            <h2>Send this through the main enquiry page.</h2>
             <p>
-              Share the essentials and KM Financing will receive a secure,
-              trackable enquiry record with the page source and form name
-              already attached.
+              We&apos;ll preselect the enquiry type and keep this page recorded as
+              the source so KM Financing receives the right context.
             </p>
-            <EnquiryForm
-              defaultEnquiryType={page.enquiryType}
-              formName={page.formName}
-              sourcePage={`/${page.slug}`}
-              submitLabel={page.submitLabel}
-            />
+            <ul className="checklist">
+              <li>Your enquiry type will already be selected.</li>
+              <li>This page will be attached as the submission source.</li>
+              <li>The secure backend and email workflow stay exactly the same.</li>
+            </ul>
+            <Link className="button" href={enquiryHref}>
+              Send an enquiry
+            </Link>
           </article>
         </aside>
       </section>
