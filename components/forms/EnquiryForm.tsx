@@ -1,13 +1,12 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
 import { ENQUIRY_TYPES, type LeadEnquiryInput } from "../../lib/enquiry-schema";
 
 type EnquiryFormProps = {
   formName: string;
-  sourcePage?: string;
+  sourcePage: string;
   defaultEnquiryType?: LeadEnquiryInput["enquiryType"];
   submitLabel?: string;
   utmSource?: string;
@@ -43,6 +42,24 @@ const initialState: EnquiryFormState = {
   website: "",
 };
 
+function readUtmFromLocation() {
+  if (typeof window === "undefined") {
+    return {
+      utmSource: undefined,
+      utmMedium: undefined,
+      utmCampaign: undefined,
+    };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    utmSource: params.get("utm_source") ?? undefined,
+    utmMedium: params.get("utm_medium") ?? undefined,
+    utmCampaign: params.get("utm_campaign") ?? undefined,
+  };
+}
+
 export function EnquiryForm({
   formName,
   sourcePage,
@@ -52,8 +69,6 @@ export function EnquiryForm({
   utmMedium,
   utmCampaign,
 }: EnquiryFormProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [formState, setFormState] = useState<EnquiryFormState>({
     ...initialState,
     enquiryType: defaultEnquiryType ?? "",
@@ -79,6 +94,7 @@ export function EnquiryForm({
     setSuccessMessage(null);
 
     try {
+      const utm = readUtmFromLocation();
       const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: {
@@ -93,11 +109,10 @@ export function EnquiryForm({
           message: formState.message,
           consent: formState.consent,
           formName,
-          sourcePage: sourcePage ?? pathname ?? "/",
-          utmSource: utmSource ?? searchParams.get("utm_source") ?? undefined,
-          utmMedium: utmMedium ?? searchParams.get("utm_medium") ?? undefined,
-          utmCampaign:
-            utmCampaign ?? searchParams.get("utm_campaign") ?? undefined,
+          sourcePage,
+          utmSource: utmSource ?? utm.utmSource,
+          utmMedium: utmMedium ?? utm.utmMedium,
+          utmCampaign: utmCampaign ?? utm.utmCampaign,
           website: formState.website,
         }),
       });
