@@ -2,6 +2,15 @@ import "server-only";
 
 import { Resend } from "resend";
 
-import { serverEnv } from "./env";
+import { getServerEnv } from "./env";
 
-export const resend = new Resend(serverEnv.resendApiKey);
+let cachedResend: Resend | null = null;
+
+export function getResend() {
+  if (cachedResend) {
+    return cachedResend;
+  }
+
+  cachedResend = new Resend(getServerEnv().resendApiKey);
+  return cachedResend;
+}
