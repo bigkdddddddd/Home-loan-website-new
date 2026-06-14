@@ -14,10 +14,7 @@ The most important security rule is preserved throughout the project: do not imp
   - Asset Finance
   - Business Loans
   - Calculators
-- Homepage forms for:
-  - Main contact form
-  - Book a Free Consultation form
-  - Check Your Options form
+- Dedicated `/enquiry` page with one shared enquiry form
 - Shared `app/api/enquiries/route.ts` backend with:
   - Zod validation
   - Honeypot spam protection
@@ -38,6 +35,7 @@ The most important security rule is preserved throughout the project: do not imp
 ## Route map
 
 - `/`
+- `/enquiry`
 - `/home-loans`
 - `/car-loans`
 - `/refinance`
@@ -56,7 +54,7 @@ The most important security rule is preserved throughout the project: do not imp
 6. Add `RESEND_FROM_EMAIL=info@kmfinancing.com` and `KM_FINANCING_NOTIFICATION_EMAIL=info@kmfinancing.com` to `.env.local`.
 7. Set `NEXT_PUBLIC_SITE_URL` in `.env.local`, then restart the dev server.
 8. Verify the `kmfinancing.com` sending domain inside Resend before using `info@kmfinancing.com`.
-9. Test each form and confirm the request reaches `/api/enquiries`.
+9. Test the enquiry page and confirm the request reaches `/api/enquiries`.
 10. Confirm the lead appears in Supabase and the notification email is received.
 
 ## Security notes
