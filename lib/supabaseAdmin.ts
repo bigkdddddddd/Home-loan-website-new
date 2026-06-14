@@ -1,12 +1,14 @@
 import "server-only";
 
-import { createClient } from "@supabase/supabase-js";
+import {
+  createClient,
+  type SupabaseClient,
+} from "@supabase/supabase-js";
 
 import { getServerEnv } from "./env";
+import type { Database } from "./supabase.types";
 
-let cachedSupabaseAdmin:
-  | ReturnType<typeof createClient>
-  | null = null;
+let cachedSupabaseAdmin: SupabaseClient<Database> | null = null;
 
 // This client must stay on the server because it uses the service role key.
 export function getSupabaseAdmin() {
@@ -16,7 +18,7 @@ export function getSupabaseAdmin() {
 
   const serverEnv = getServerEnv();
 
-  cachedSupabaseAdmin = createClient(
+  cachedSupabaseAdmin = createClient<Database>(
     serverEnv.supabaseUrl,
     serverEnv.supabaseServiceRoleKey,
     {
