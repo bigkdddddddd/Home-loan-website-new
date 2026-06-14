@@ -57,6 +57,18 @@ The most important security rule is preserved throughout the project: do not imp
 9. Test the enquiry page and confirm the request reaches `/api/enquiries`.
 10. Confirm the lead appears in Supabase and the notification email is received.
 
+## Environment variables
+
+- Required for lead storage:
+  - `NEXT_PUBLIC_SUPABASE_URL` or `SUPABASE_URL`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+- Optional for email sending:
+  - `RESEND_API_KEY`
+  - `RESEND_FROM_EMAIL`
+  - `KM_FINANCING_NOTIFICATION_EMAIL`
+
+If Resend is not configured yet, the form will still store the lead in Supabase and skip the email sends.
+
 ## Security notes
 
 - The browser never inserts directly into Supabase.

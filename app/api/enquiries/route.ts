@@ -4,7 +4,7 @@ import {
   leadEnquirySchema,
   type LeadEnquiryInput,
 } from "../../../lib/enquiry-schema";
-import { getServerEnv, type ServerEnv } from "../../../lib/env";
+import { getEmailEnv, type EmailEnv } from "../../../lib/env";
 import { getResend } from "../../../lib/resend";
 import { getSupabaseAdmin } from "../../../lib/supabaseAdmin";
 
@@ -120,12 +120,12 @@ function buildCustomerConfirmationEmail(enquiry: LeadEnquiryInput) {
 async function sendInternalNotificationEmail(
   enquiry: LeadEnquiryInput,
   submittedAt: string,
-  serverEnv: ServerEnv,
+  emailEnv: EmailEnv,
 ) {
   const email = buildInternalNotificationEmail(enquiry, submittedAt);
-  const { error } = await getResend().emails.send({
-    from: serverEnv.resendFromEmail,
-    to: [serverEnv.kmFinancingNotificationEmail],
+  const { error } = await getResend(emailEnv.resendApiKey).emails.send({
+    from: emailEnv.resendFromEmail,
+    to: [emailEnv.kmFinancingNotificationEmail],
     subject: email.subject,
     html: email.html,
     text: email.text,
@@ -138,11 +138,11 @@ async function sendInternalNotificationEmail(
 
 async function sendCustomerConfirmationEmail(
   enquiry: LeadEnquiryInput,
-  serverEnv: ServerEnv,
+  emailEnv: EmailEnv,
 ) {
   const email = buildCustomerConfirmationEmail(enquiry);
-  const { error } = await getResend().emails.send({
-    from: serverEnv.resendFromEmail,
+  const { error } = await getResend(emailEnv.resendApiKey).emails.send({
+    from: emailEnv.resendFromEmail,
     to: [enquiry.email],
     subject: email.subject,
     html: email.html,
@@ -152,6 +152,17 @@ async function sendCustomerConfirmationEmail(
   if (error) {
     throw new Error(error.message);
   }
+}
+
+function getConfigurationErrorMessage(error: unknown) {
+  if (
+    error instanceof Error &&
+    error.message.includes("Missing required environment variable")
+  ) {
+    return "The enquiry service is still being configured on the server. Please try again shortly.";
+  }
+
+  return null;
 }
 
 export async function POST(request: Request) {
@@ -193,7 +204,7 @@ export async function POST(request: Request) {
       });
     }
 
-    const serverEnv = getServerEnv();
+    const emailEnv = getEmailEnv();
     const supabaseAdmin = getSupabaseAdmin();
     const submittedAt = new Date().toISOString();
     const { data: insertedLead, error: insertError } = await supabaseAdmin
@@ -231,22 +242,29 @@ export async function POST(request: Request) {
       );
     }
 
-    try {
-      await sendInternalNotificationEmail(enquiry, submittedAt, serverEnv);
-    } catch (error) {
-      console.error("Failed to send internal enquiry notification.", {
-        leadId: insertedLead?.id ?? null,
-        error,
-      });
-    }
+    if (emailEnv) {
+      try {
+        await sendInternalNotificationEmail(enquiry, submittedAt, emailEnv);
+      } catch (error) {
+        console.error("Failed to send internal enquiry notification.", {
+          leadId: insertedLead?.id ?? null,
+          error,
+        });
+      }
 
-    try {
-      await sendCustomerConfirmationEmail(enquiry, serverEnv);
-    } catch (error) {
-      console.error("Failed to send customer confirmation email.", {
-        leadId: insertedLead?.id ?? null,
-        error,
-      });
+      try {
+        await sendCustomerConfirmationEmail(enquiry, emailEnv);
+      } catch (error) {
+        console.error("Failed to send customer confirmation email.", {
+          leadId: insertedLead?.id ?? null,
+          error,
+        });
+      }
+    } else {
+      console.warn(
+        "Lead enquiry stored without email notifications because Resend is not fully configured.",
+        { leadId: insertedLead?.id ?? null },
+      );
     }
 
     return NextResponse.json({
@@ -260,6 +278,7 @@ export async function POST(request: Request) {
       {
         success: false,
         message:
+          getConfigurationErrorMessage(error) ??
           "We couldn't submit your enquiry right now. Please try again shortly.",
       },
       { status: 500 },
