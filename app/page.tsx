@@ -130,6 +130,7 @@ export default function HomePage() {
               <EnquiryForm
                 defaultEnquiryType={form.defaultEnquiryType}
                 formName={form.formName}
+                sourcePage="/"
                 submitLabel={form.submitLabel}
               />
             </article>
