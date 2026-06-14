@@ -18,16 +18,6 @@ export type ServerEnv = SupabaseEnv & {
 let cachedServerEnv: ServerEnv | null = null;
 let cachedEmailEnv: EmailEnv | null | undefined;
 
-function readRequiredEnv(name: string): string {
-  const value = process.env[name]?.trim();
-
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-
-  return value;
-}
-
 function readOptionalEnv(name: string): string | null {
   return process.env[name]?.trim() || null;
 }
@@ -49,6 +39,23 @@ function readSupabaseUrl(): string {
   );
 }
 
+function readSupabaseServerKey(): string {
+  const legacyServiceRoleKey = readOptionalEnv("SUPABASE_SERVICE_ROLE_KEY");
+  const secretKey = readOptionalEnv("SUPABASE_SECRET_KEY");
+
+  if (legacyServiceRoleKey) {
+    return legacyServiceRoleKey;
+  }
+
+  if (secretKey) {
+    return secretKey;
+  }
+
+  throw new Error(
+    "Missing required environment variable: SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SECRET_KEY",
+  );
+}
+
 export function getServerEnv(): ServerEnv {
   if (cachedServerEnv) {
     return cachedServerEnv;
@@ -56,7 +63,7 @@ export function getServerEnv(): ServerEnv {
 
   cachedServerEnv = Object.freeze({
     supabaseUrl: readSupabaseUrl(),
-    supabaseServiceRoleKey: readRequiredEnv("SUPABASE_SERVICE_ROLE_KEY"),
+    supabaseServiceRoleKey: readSupabaseServerKey(),
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL?.trim() || null,
   });
 

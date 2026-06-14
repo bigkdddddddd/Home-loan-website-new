@@ -61,7 +61,7 @@ The most important security rule is preserved throughout the project: do not imp
 
 - Required for lead storage:
   - `NEXT_PUBLIC_SUPABASE_URL` or `SUPABASE_URL`
-  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY`
 - Optional for email sending:
   - `RESEND_API_KEY`
   - `RESEND_FROM_EMAIL`
@@ -73,7 +73,7 @@ If Resend is not configured yet, the form will still store the lead in Supabase 
 
 - The browser never inserts directly into Supabase.
 - The browser never calls Resend directly.
-- `SUPABASE_SERVICE_ROLE_KEY` is only read in server-only modules.
+- `SUPABASE_SERVICE_ROLE_KEY` / `SUPABASE_SECRET_KEY` is only read in server-only modules.
 - Secrets are not prefixed with `NEXT_PUBLIC_`.
 - `.gitignore` excludes local environment files.
 - RLS is enabled on `public.lead_enquiries`, and public table privileges are revoked from `anon` and `authenticated`.
