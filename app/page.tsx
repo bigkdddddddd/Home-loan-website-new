@@ -1,25 +1,30 @@
 import Link from "next/link";
 
-import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import {
-  homeHighlights,
-  homePageForms,
-  homeProcess,
-  journeyPages,
-} from "@/lib/site-content";
+import { journeyPages } from "@/lib/site-content";
 
-const includedForms = [
-  "Main contact form",
-  "Home loan enquiry form",
-  "Car loan enquiry form",
-  "Refinance form",
-  "First home buyer form",
-  "Asset finance form",
-  "Business loan form",
-  "Calculator result enquiry form",
-  "Book a Free Consultation form",
-  "Check Your Options form",
+const homeHighlights = [
+  "Dedicated loan pages",
+  "One enquiry page",
+  "Server-only secret handling",
+  "Lead tracking in Supabase",
 ] as const;
+
+const homeProcess = [
+  {
+    title: "Explore the right lending path",
+    body: "Visitors can read the dedicated lending pages, then move into one shared enquiry page when they are ready to talk.",
+  },
+  {
+    title: "Submit through one secure form",
+    body: "Every enquiry passes through the same validated API route, with honeypot spam protection and no browser access to Supabase or Resend secrets.",
+  },
+  {
+    title: "Store and notify",
+    body: "The lead is written to Supabase and notification emails are sent from info@kmfinancing.com so the team can follow up quickly.",
+  },
+] as const;
+
+const homeEnquiryHref = "/enquiry?source=%2F";
 
 export default function HomePage() {
   return (
@@ -27,15 +32,15 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero-copy">
           <p className="eyebrow">KM Financing website build</p>
-          <h1>Clear enquiry paths for every lending conversation.</h1>
+          <h1>One secure enquiry page, with clearer finance pathways.</h1>
           <p className="lead">
-            This build gives KM Financing a polished, multi-page frontend backed
-            by one secure enquiry route that validates, stores, and emails every
-            lead without exposing backend secrets to the browser.
+            This build gives KM Financing dedicated lending pages and a single
+            enquiry page that captures every lead without exposing backend
+            secrets to the browser.
           </p>
 
           <div className="hero-actions">
-            <Link className="button" href="#forms">
+            <Link className="button" href={homeEnquiryHref}>
               Send an enquiry
             </Link>
             <Link className="button button--ghost" href="/home-loans">
@@ -53,12 +58,13 @@ export default function HomePage() {
         </div>
 
         <aside className="panel panel--highlight">
-          <p className="eyebrow">Required forms now included</p>
-          <h2>Every key enquiry entry point is covered.</h2>
+          <p className="eyebrow">What is included</p>
+          <h2>A simpler path from browsing to enquiry.</h2>
           <ul className="checklist">
-            {includedForms.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
+            <li>Dedicated pages for the major lending paths.</li>
+            <li>One separate enquiry page for every submission.</li>
+            <li>Server-side lead capture with Supabase and Resend.</li>
+            <li>No Supabase service role key in any client component.</li>
           </ul>
         </aside>
       </section>
@@ -68,9 +74,8 @@ export default function HomePage() {
           <p className="eyebrow">Lending pathways</p>
           <h2>Dedicated pages for the journeys people search for most.</h2>
           <p>
-            Each page uses the same backend workflow while presenting a tailored
-            enquiry form, page-specific copy, and cleaner attribution through
-            `form_name` and `source_page`.
+            Each page explains the lending path clearly, then sends visitors to
+            the main enquiry page when they are ready to submit.
           </p>
         </div>
 
@@ -91,7 +96,7 @@ export default function HomePage() {
       <section className="section section--contrast">
         <div className="section-heading">
           <p className="eyebrow">Shared submission flow</p>
-          <h2>One secure route, reused across every form.</h2>
+          <h2>One secure route, reused by the enquiry page.</h2>
           <p>
             Visitors can start from different pages, but every submission lands
             in the same validated API workflow before it is inserted into
@@ -110,31 +115,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="forms">
+      <section className="section">
         <div className="section-heading">
-          <p className="eyebrow">Homepage forms</p>
-          <h2>General contact, consultation, and options all flow through the same backend.</h2>
+          <p className="eyebrow">Enquiry page</p>
+          <h2>When visitors are ready, send them to one focused form.</h2>
           <p>
-            These are the main multi-purpose forms required by the brief. The
-            more specific lending pages each include their own dedicated enquiry
-            form as well.
+            The enquiry page works for general contact and loan-specific
+            conversations, while still recording the originating page for
+            cleaner tracking.
           </p>
         </div>
 
         <div className="form-card-grid">
-          {homePageForms.map((form) => (
-            <article className="panel panel--form" key={form.formName}>
-              <p className="eyebrow">Shared route</p>
-              <h3>{form.title}</h3>
-              <p>{form.copy}</p>
-              <EnquiryForm
-                defaultEnquiryType={form.defaultEnquiryType}
-                formName={form.formName}
-                sourcePage="/"
-                submitLabel={form.submitLabel}
-              />
-            </article>
-          ))}
+          <article className="panel panel--form">
+            <p className="eyebrow">Single form experience</p>
+            <h3>General questions and loan-specific enquiries now use the same page.</h3>
+            <p>
+              That keeps the homepage lighter, removes duplicate form blocks,
+              and makes the main conversion path much clearer.
+            </p>
+            <div className="hero-actions">
+              <Link className="button" href={homeEnquiryHref}>
+                Open the enquiry page
+              </Link>
+              <Link
+                className="button button--ghost"
+                href="/enquiry?type=Home%20Loan&source=%2Fhome-loans"
+              >
+                Preview a home loan enquiry
+              </Link>
+            </div>
+          </article>
+
+          <article className="panel">
+            <p className="eyebrow">Tracking stays intact</p>
+            <h3>Source page and enquiry type are still captured cleanly.</h3>
+            <ul className="checklist">
+              <li>Use `/enquiry` for general contact.</li>
+              <li>Use a prefilled enquiry link from each lending page.</li>
+              <li>All submissions still land in the same secure API route.</li>
+            </ul>
+          </article>
         </div>
       </section>
     </div>
