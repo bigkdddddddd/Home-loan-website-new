@@ -64,5 +64,5 @@ The most important security rule is preserved throughout the project: do not imp
 - `SUPABASE_SERVICE_ROLE_KEY` is only read in server-only modules.
 - Secrets are not prefixed with `NEXT_PUBLIC_`.
 - `.gitignore` excludes local environment files.
-- RLS is enabled on `public.lead_enquiries`, and this project does not add an anonymous insert policy.
+- RLS is enabled on `public.lead_enquiries`, and public table privileges are revoked from `anon` and `authenticated`.
 - Supabase now prefers newer secret keys (`sb_secret_...`) for fresh projects. If you use one, keep it server-side exactly the same way.
