@@ -4,9 +4,9 @@ import {
   leadEnquirySchema,
   type LeadEnquiryInput,
 } from "../../../lib/enquiry-schema";
-import { resend } from "../../../lib/resend";
-import { serverEnv } from "../../../lib/env";
-import { supabaseAdmin } from "../../../lib/supabaseAdmin";
+import { getServerEnv, type ServerEnv } from "../../../lib/env";
+import { getResend } from "../../../lib/resend";
+import { getSupabaseAdmin } from "../../../lib/supabaseAdmin";
 
 export const runtime = "nodejs";
 
@@ -120,9 +120,10 @@ function buildCustomerConfirmationEmail(enquiry: LeadEnquiryInput) {
 async function sendInternalNotificationEmail(
   enquiry: LeadEnquiryInput,
   submittedAt: string,
+  serverEnv: ServerEnv,
 ) {
   const email = buildInternalNotificationEmail(enquiry, submittedAt);
-  const { error } = await resend.emails.send({
+  const { error } = await getResend().emails.send({
     from: serverEnv.resendFromEmail,
     to: [serverEnv.kmFinancingNotificationEmail],
     subject: email.subject,
@@ -135,9 +136,12 @@ async function sendInternalNotificationEmail(
   }
 }
 
-async function sendCustomerConfirmationEmail(enquiry: LeadEnquiryInput) {
+async function sendCustomerConfirmationEmail(
+  enquiry: LeadEnquiryInput,
+  serverEnv: ServerEnv,
+) {
   const email = buildCustomerConfirmationEmail(enquiry);
-  const { error } = await resend.emails.send({
+  const { error } = await getResend().emails.send({
     from: serverEnv.resendFromEmail,
     to: [enquiry.email],
     subject: email.subject,
@@ -189,6 +193,8 @@ export async function POST(request: Request) {
       });
     }
 
+    const serverEnv = getServerEnv();
+    const supabaseAdmin = getSupabaseAdmin();
     const submittedAt = new Date().toISOString();
     const { data: insertedLead, error: insertError } = await supabaseAdmin
       .from("lead_enquiries")
@@ -226,7 +232,7 @@ export async function POST(request: Request) {
     }
 
     try {
-      await sendInternalNotificationEmail(enquiry, submittedAt);
+      await sendInternalNotificationEmail(enquiry, submittedAt, serverEnv);
     } catch (error) {
       console.error("Failed to send internal enquiry notification.", {
         leadId: insertedLead?.id ?? null,
@@ -235,7 +241,7 @@ export async function POST(request: Request) {
     }
 
     try {
-      await sendCustomerConfirmationEmail(enquiry);
+      await sendCustomerConfirmationEmail(enquiry, serverEnv);
     } catch (error) {
       console.error("Failed to send customer confirmation email.", {
         leadId: insertedLead?.id ?? null,
