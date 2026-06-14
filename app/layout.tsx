@@ -53,9 +53,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   {item.label}
                 </Link>
               ))}
+              <Link href="/enquiry">Enquiry</Link>
             </nav>
 
-            <Link className="button button--ghost button--small" href="/#forms">
+            <Link className="button button--ghost button--small" href="/enquiry">
               Start an enquiry
             </Link>
           </header>
@@ -68,7 +69,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <p className="eyebrow">KM Financing</p>
                 <h2>Built for clear enquiry pathways.</h2>
                 <p>
-                  Every form on this site routes through one validated backend
+                  Every enquiry on this site routes through one validated backend
                   flow so leads can be stored securely and followed up quickly.
                 </p>
               </div>
@@ -91,8 +92,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   Loan outcomes remain subject to lender criteria, assessment,
                   terms and conditions.
                 </p>
-                <Link className="text-link" href="/#forms">
-                  Go to the main enquiry forms
+                <Link className="text-link" href="/enquiry">
+                  Open the enquiry page
                 </Link>
               </div>
             </div>
