@@ -156,7 +156,7 @@ export function EnquiryForm({
           <input
             autoComplete="name"
             name="fullName"
-            placeholder="Jane Citizen"
+            placeholder="Your full name"
             required
             type="text"
             value={formState.fullName}
@@ -169,7 +169,7 @@ export function EnquiryForm({
           <input
             autoComplete="email"
             name="email"
-            placeholder="name@example.com"
+            placeholder="your@email.com"
             required
             type="email"
             value={formState.email}
@@ -182,7 +182,7 @@ export function EnquiryForm({
           <input
             autoComplete="tel"
             name="phone"
-            placeholder="0400 000 000"
+            placeholder="04xx xxx xxx"
             required
             type="tel"
             value={formState.phone}
@@ -212,7 +212,7 @@ export function EnquiryForm({
           <input
             inputMode="decimal"
             name="estimatedLoanAmount"
-            placeholder="$650,000"
+            placeholder="$500,000"
             type="text"
             value={formState.estimatedLoanAmount}
             onChange={(event) =>
@@ -226,7 +226,7 @@ export function EnquiryForm({
           <textarea
             maxLength={2000}
             name="message"
-            placeholder="Tell KM Financing a little more about your goals, timing, or questions."
+            placeholder="Tell us about your goals, timeframe, property or vehicle plans, business funding needs, or any questions you want answered."
             value={formState.message}
             onChange={(event) => updateField("message", event.target.value)}
           />

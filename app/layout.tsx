@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | KM Financing",
   },
   description:
-    "KM Financing website with secure enquiry capture, Supabase lead storage, and Resend notification emails.",
+    "KM Financing helps with home loans, car loans, refinance, first-home buyer support, asset finance and business lending.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <span className="brand-mark">KM</span>
               <span className="brand-copy">
                 <strong>KM Financing</strong>
-                <small>Secure lending enquiries</small>
+                <small>Loan and finance solutions</small>
               </span>
             </Link>
 
@@ -67,10 +67,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <div className="footer-grid">
               <div className="panel">
                 <p className="eyebrow">KM Financing</p>
-                <h2>Built for clear enquiry pathways.</h2>
+                <h2>Finance support across key lending needs.</h2>
                 <p>
-                  Every enquiry on this site routes through one validated backend
-                  flow so leads can be stored securely and followed up quickly.
+                  Explore home loans, car loans, refinance, first-home buyer
+                  guidance, asset finance and business lending through one clear
+                  enquiry path.
                 </p>
               </div>
 
@@ -99,7 +100,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
 
             <p className="footer-meta">
-              © {currentYear} KM Financing. General information only.
+              Copyright {currentYear} KM Financing. General information only.
             </p>
           </footer>
         </div>

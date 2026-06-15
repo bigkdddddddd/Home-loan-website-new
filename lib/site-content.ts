@@ -41,45 +41,45 @@ export const primaryNav = [
 ] as const;
 
 export const homeHighlights = [
-  "Multiple enquiry pages",
-  "One secure backend route",
-  "Server-only secret handling",
-  "Lead tracking in Supabase",
+  "Home loans",
+  "Car loans",
+  "Refinance",
+  "Business lending",
 ] as const;
 
 export const homeProcess: JourneyStep[] = [
   {
-    title: "Choose the right form",
-    body: "Visitors can start from a dedicated lending page or from the general contact, consultation, and options forms on the homepage.",
+    title: "Choose the right lending path",
+    body: "Start with the loan or finance category that best matches your plans, whether that is property, vehicles, refinance, or business lending.",
   },
   {
-    title: "Submit through one secure route",
-    body: "Every enquiry passes through the same validated API route, with honeypot spam protection and no direct browser access to Supabase or Resend secrets.",
+    title: "Share the details that matter",
+    body: "Use the enquiry form to explain your goals, timing, estimated amount, and the questions you want to discuss with KM Financing.",
   },
   {
-    title: "Store and notify",
-    body: "The lead is written to Supabase and notification emails are sent from info@kmfinancing.com so the team can follow up quickly.",
+    title: "Receive a more relevant follow-up",
+    body: "Your enquiry arrives with the right service context so KM Financing can continue the conversation from a more informed starting point.",
   },
 ];
 
 export const homePageForms: HomePageForm[] = [
   {
-    title: "Main contact form",
-    copy: "Use this for general finance questions, broad scenarios, or when you want KM Financing to point you toward the right next step.",
+    title: "General finance enquiry",
+    copy: "Use this for broad finance questions or when you want KM Financing to help identify the best place to start.",
     formName: "Home Page Contact Form",
     defaultEnquiryType: "Other",
     submitLabel: "Send message",
   },
   {
-    title: "Book a Free Consultation",
-    copy: "Start a conversation about timing, borrowing plans, and the best way to prepare before speaking with a lender.",
+    title: "Book a conversation",
+    copy: "Start a conversation about timing, borrowing goals and the right way to prepare for the next step.",
     formName: "Book a Free Consultation Form",
     defaultEnquiryType: "Home Loan",
     submitLabel: "Book consultation",
   },
   {
-    title: "Check Your Options",
-    copy: "Share your current position and goals if you want help narrowing down which lending path is most relevant to discuss.",
+    title: "Explore your options",
+    copy: "Share your current position and goals if you want help narrowing down which loan or finance path is most relevant.",
     formName: "Check Your Options Form",
     defaultEnquiryType: "Other",
     submitLabel: "Check options",
@@ -91,7 +91,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "home-loans",
     label: "Home Loans",
     navLabel: "Home Loans",
-    teaser: "A dedicated starting point for owner-occupier and investment purchase conversations.",
+    teaser: "Support for owner-occupier and investment purchase enquiries.",
     eyebrow: "Property lending conversations",
     heading: "Start your home loan enquiry with a clearer brief.",
     description:
@@ -109,15 +109,15 @@ export const journeyPages: JourneyPage[] = [
     process: [
       {
         title: "Tell us the scenario",
-        body: "Share where you are in the buying process and what you want the enquiry to help you clarify.",
+        body: "Share where you are in the buying process and what you want the next conversation to help you clarify.",
       },
       {
-        title: "Capture the essentials",
-        body: "The form records your core contact details, lending category, estimated amount, and page source.",
+        title: "Add the key numbers",
+        body: "Include your expected budget, deposit or equity position, and any timing details that may shape the discussion.",
       },
       {
         title: "Move to the next conversation",
-        body: "KM Financing receives the enquiry details and can continue the discussion with the right context already in place.",
+        body: "KM Financing can continue the conversation with a clearer understanding of your property goals and finance priorities.",
       },
     ],
     formName: "Home Loan Enquiry Form",
@@ -128,7 +128,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "car-loans",
     label: "Car Loans",
     navLabel: "Car Loans",
-    teaser: "A streamlined path for vehicle finance questions and application preparation.",
+    teaser: "A straightforward starting point for vehicle finance questions.",
     eyebrow: "Vehicle finance enquiries",
     heading: "Make your car loan enquiry easy to review.",
     description:
@@ -146,15 +146,15 @@ export const journeyPages: JourneyPage[] = [
     process: [
       {
         title: "Share your vehicle plans",
-        body: "Start with the type of purchase you are planning and any repayment or timing considerations you have in mind.",
+        body: "Start with the vehicle you are considering and any purchase timing or repayment preferences you already have in mind.",
       },
       {
-        title: "Store the lead securely",
-        body: "The secure route records the enquiry in Supabase without exposing backend credentials in the browser.",
+        title: "Add budget and purchase context",
+        body: "Include any expected purchase price, deposit, trade-in, or borrowing range that may help frame the discussion.",
       },
       {
         title: "Receive a guided response",
-        body: "KM Financing can pick up the conversation with the vehicle finance details already linked to the enquiry.",
+        body: "KM Financing can pick up the conversation with the vehicle finance details already linked to your enquiry.",
       },
     ],
     formName: "Car Loan Enquiry Form",
@@ -165,7 +165,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "refinance",
     label: "Refinance",
     navLabel: "Refinance",
-    teaser: "Capture the current loan picture before discussing restructure or comparison options.",
+    teaser: "A focused page for reviewing your current loan and refinance goals.",
     eyebrow: "Restructure and review",
     heading: "Start a refinance conversation with the key details in place.",
     description:
@@ -186,12 +186,12 @@ export const journeyPages: JourneyPage[] = [
         body: "Use the message field to explain what you have now and what you would like the next discussion to focus on.",
       },
       {
-        title: "Track the source page",
-        body: "The backend stores where the enquiry started so refinance demand can be measured separately from other journeys.",
+        title: "Share what you want to improve",
+        body: "Mention whether the goal is lower repayments, a different loan structure, debt consolidation, or more flexibility.",
       },
       {
         title: "Continue with context",
-        body: "Notification emails include the enquiry type, message, and source page so the follow-up starts from the right frame.",
+        body: "KM Financing can review the enquiry with your current loan picture and refinance goals already in place.",
       },
     ],
     formName: "Refinance Form",
@@ -202,7 +202,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "first-home-buyer",
     label: "First Home Buyer",
     navLabel: "First Home Buyer",
-    teaser: "Give first-home enquiries a focused path with room for timing, deposit, and confidence questions.",
+    teaser: "A comfortable starting point for first-home buyer questions and planning.",
     eyebrow: "First step into property",
     heading: "Help first-home buyers ask better questions from day one.",
     description:
@@ -219,16 +219,16 @@ export const journeyPages: JourneyPage[] = [
     ],
     process: [
       {
-        title: "Start with your goals",
-        body: "The form is designed to gather the essentials without forcing a fully worked-out application at the first touchpoint.",
+        title: "Start with where you are up to",
+        body: "Share whether you are saving, researching, house hunting, or preparing to speak with a lender for the first time.",
       },
       {
-        title: "Keep the submission secure",
-        body: "Lead data is validated and stored through the backend so each first-home enquiry follows the same reliable workflow.",
+        title: "Add deposit and timing context",
+        body: "Include any deposit progress, target price range, or timing goals so the follow-up can be more practical.",
       },
       {
         title: "Set up the next conversation",
-        body: "KM Financing receives a clear summary that can guide a helpful follow-up without overpromising outcomes.",
+        body: "KM Financing receives a clear summary that helps shape a more helpful first-home buyer conversation.",
       },
     ],
     formName: "First Home Buyer Form",
@@ -239,7 +239,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "asset-finance",
     label: "Asset Finance",
     navLabel: "Asset Finance",
-    teaser: "A dedicated page for equipment, plant, and vehicle finance discussions tied to business needs.",
+    teaser: "A dedicated page for equipment, plant and commercial asset finance discussions.",
     eyebrow: "Business asset funding",
     heading: "Capture asset finance enquiries with the right commercial detail.",
     description:
@@ -247,7 +247,7 @@ export const journeyPages: JourneyPage[] = [
     highlights: [
       "Equipment and plant focus",
       "Business purchase context",
-      "Secure lead handoff",
+      "Commercial funding clarity",
     ],
     checkpoints: [
       "What asset you are considering and why it matters to the business plan.",
@@ -257,15 +257,15 @@ export const journeyPages: JourneyPage[] = [
     process: [
       {
         title: "Describe the asset need",
-        body: "Start with the asset type, timeline, and any funding questions you want the next conversation to address.",
+        body: "Start with the asset type, business purpose, and any funding questions you want the next conversation to address.",
       },
       {
-        title: "Save the commercial context",
-        body: "The shared backend stores the enquiry with the correct form name and page source for cleaner tracking.",
+        title: "Add budget and timing",
+        body: "Share any budget range, purchase timing, or cash-flow considerations that may shape the funding discussion.",
       },
       {
         title: "Follow up with clarity",
-        body: "Notification emails sent through Resend keep the core facts together for a smoother response process.",
+        body: "KM Financing can continue the discussion with the commercial asset details already summarised in one place.",
       },
     ],
     formName: "Asset Finance Form",
@@ -276,7 +276,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "business-loans",
     label: "Business Loans",
     navLabel: "Business Loans",
-    teaser: "A focused intake path for expansion, working capital, or general business lending discussions.",
+    teaser: "A focused starting point for expansion, working capital and general business funding discussions.",
     eyebrow: "Commercial lending",
     heading: "Give business loan enquiries a stronger starting brief.",
     description:
@@ -284,7 +284,7 @@ export const journeyPages: JourneyPage[] = [
     highlights: [
       "Growth and cash-flow briefs",
       "Commercial enquiry tracking",
-      "Shared secure workflow",
+      "Funding conversations with context",
     ],
     checkpoints: [
       "The business objective behind the finance enquiry.",
@@ -297,12 +297,12 @@ export const journeyPages: JourneyPage[] = [
         body: "Use the message field to explain the business context in plain language without needing a full application pack upfront.",
       },
       {
-        title: "Validate every submission",
-        body: "The API route ensures required fields and consent are present before the lead is recorded.",
+        title: "Add timing and amount context",
+        body: "Include the broad amount, purpose and timeframe so the business lending discussion can start with the right frame.",
       },
       {
-        title: "Send the lead to the team",
-        body: "KM Financing receives the business enquiry details by email and in Supabase for ongoing tracking.",
+        title: "Send the enquiry through",
+        body: "KM Financing receives the business funding enquiry with the context needed for a more relevant follow-up.",
       },
     ],
     formName: "Business Loan Form",
@@ -313,7 +313,7 @@ export const journeyPages: JourneyPage[] = [
     slug: "calculators",
     label: "Calculators",
     navLabel: "Calculators",
-    teaser: "Turn calculator estimates into a real enquiry without losing the numbers that prompted the question.",
+    teaser: "Turn calculator estimates into a real finance conversation.",
     eyebrow: "Calculator follow-up",
     heading: "Convert calculator results into a practical next step.",
     description:
@@ -331,15 +331,15 @@ export const journeyPages: JourneyPage[] = [
     process: [
       {
         title: "Reference the result",
-        body: "Use the enquiry form to mention the figure or scenario that sparked the conversation.",
+        body: "Use the enquiry form to mention the figure, estimate, or scenario that sparked the question.",
       },
       {
-        title: "Keep the trail connected",
-        body: "The submission records the calculator form name and source page so results-led leads can be tracked distinctly.",
+        title: "Explain what you want to clarify",
+        body: "Let KM Financing know whether you want to discuss borrowing power, repayments, loan structure, or what to do next.",
       },
       {
         title: "Move from estimate to discussion",
-        body: "KM Financing can use the stored enquiry details as a starting point for the next general-information conversation.",
+        body: "KM Financing can use the calculator context as a starting point for a more practical follow-up conversation.",
       },
     ],
     formName: "Calculator Enquiry Form",

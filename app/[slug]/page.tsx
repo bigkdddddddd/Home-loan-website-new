@@ -59,15 +59,15 @@ export default async function JourneyPage({ params }: PageProps) {
         </div>
 
         <aside className="panel panel--highlight">
-          <p className="eyebrow">Secure submission path</p>
-          <h2>{page.label} enquiries land in one reliable workflow.</h2>
+          <p className="eyebrow">Talk to KM Financing</p>
+          <h2>A straightforward next step for {page.label.toLowerCase()} questions.</h2>
           <p>
-            Each submission is validated with Zod, stored in Supabase, and sent
-            out through Resend from info@kmfinancing.com. No service role key is
-            exposed to the frontend.
+            Use the enquiry page to share your plans, timing and key figures.
+            KM Financing will receive the enquiry with this page attached as
+            the starting context for follow-up.
           </p>
           <Link className="text-link" href={enquiryHref}>
-            Open the main enquiry page
+            Start this enquiry
           </Link>
         </aside>
       </section>
@@ -86,7 +86,7 @@ export default async function JourneyPage({ params }: PageProps) {
 
           <article className="panel">
             <p className="eyebrow">How it works</p>
-            <h2>From page visit to stored lead record</h2>
+            <h2>A simple path from enquiry to follow-up</h2>
             <div className="process-grid process-grid--compact">
               {page.process.map((step) => (
                 <article className="process-card" key={step.title}>
@@ -114,15 +114,15 @@ export default async function JourneyPage({ params }: PageProps) {
         <aside className="content-sidebar">
           <article className="panel panel--form">
             <p className="eyebrow">Ready to enquire?</p>
-            <h2>Send this through the main enquiry page.</h2>
+            <h2>Send your details through the main enquiry page.</h2>
             <p>
               We&apos;ll preselect the enquiry type and keep this page recorded as
-              the source so KM Financing receives the right context.
+              the source so the follow-up starts with the right context.
             </p>
             <ul className="checklist">
               <li>Your enquiry type will already be selected.</li>
               <li>This page will be attached as the submission source.</li>
-              <li>The secure backend and email workflow stay exactly the same.</li>
+              <li>KM Financing receives the details in one clear enquiry flow.</li>
             </ul>
             <Link className="button" href={enquiryHref}>
               Send an enquiry

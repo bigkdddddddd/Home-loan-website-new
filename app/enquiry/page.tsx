@@ -8,7 +8,7 @@ import { journeyPages } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "Enquiry",
   description:
-    "Send a secure enquiry to KM Financing through one dedicated contact page.",
+    "Contact KM Financing about home loans, car loans, refinance, asset finance and business lending.",
 };
 
 type EnquiryPageProps = {
@@ -60,29 +60,29 @@ export default async function EnquiryPage({ searchParams }: EnquiryPageProps) {
     <div className="page-stack">
       <section className="page-hero">
         <div className="page-hero__copy">
-          <p className="eyebrow">Secure enquiry page</p>
-          <h1>Send one enquiry, routed the right way.</h1>
+          <p className="eyebrow">KM Financing enquiry</p>
+          <h1>Start the conversation with the right details.</h1>
           <p className="lead">
-            This is the main contact point for KM Financing. It uses one
-            validated backend route, stores the lead in Supabase, and sends the
-            internal notification without exposing server secrets in the
-            browser.
+            Use this page to ask about home loans, car loans, refinance,
+            first-home buyer options, asset finance or business lending. Share
+            your plans and KM Financing can follow up with the most relevant
+            next step.
           </p>
 
           <div className="chip-row">
-            <span className="chip">Single enquiry form</span>
-            <span className="chip">Server-side secret handling</span>
-            <span className="chip">Source-page tracking</span>
+            <span className="chip">Home and property loans</span>
+            <span className="chip">Vehicle and asset finance</span>
+            <span className="chip">Business lending</span>
           </div>
         </div>
 
         <aside className="panel panel--highlight">
-          <p className="eyebrow">Current context</p>
+          <p className="eyebrow">Enquiry focus</p>
           <h2>{defaultEnquiryType ?? "General enquiry"}</h2>
           <p>
             {matchingJourney
-              ? `You arrived from ${matchingJourney.label}. The enquiry type is already selected and the source page will stay attached to the submission.`
-              : "Use this page for general finance questions or to start a conversation about the lending path that fits you best."}
+              ? `You arrived from ${matchingJourney.label}. The enquiry type is already selected so you can focus on the details that matter most.`
+              : "Use this page for general finance questions or to start a conversation about the lending path that fits your plans best."}
           </p>
           <p>Recorded source page: {sourcePage}</p>
         </aside>
@@ -94,15 +94,15 @@ export default async function EnquiryPage({ searchParams }: EnquiryPageProps) {
             <p className="eyebrow">What to include</p>
             <h2>Give enough detail for a useful follow-up.</h2>
             <ul className="checklist">
-              <li>Your main finance goal and timeframe.</li>
-              <li>The loan type or scenario you want to discuss.</li>
-              <li>Any estimated amount, deposit, equity, or budget context.</li>
+              <li>Your main finance goal and preferred timing.</li>
+              <li>The loan type, purchase, or funding scenario you want to discuss.</li>
+              <li>Any budget, deposit, equity, repayment or borrowing context that may help.</li>
             </ul>
           </article>
 
           <article className="panel">
             <p className="eyebrow">Need a refresher?</p>
-            <h2>Browse the lending pages before you submit.</h2>
+            <h2>Explore the service pages before you submit.</h2>
             <div className="related-links">
               {relatedPages.map((page) => (
                 <Link key={page.slug} href={`/${page.slug}`}>
@@ -117,11 +117,11 @@ export default async function EnquiryPage({ searchParams }: EnquiryPageProps) {
         <aside className="content-sidebar">
           <article className="panel panel--form">
             <p className="eyebrow">Enquiry form</p>
-            <h2>Tell KM Financing what you need.</h2>
+            <h2>Tell us about your plans.</h2>
             <p>
-              This is the only enquiry form on the site. If you arrived from a
-              lending page, the enquiry type has already been preselected for
-              you.
+              This is the main enquiry form for KM Financing. If you arrived
+              from one of the lending pages, the enquiry type has already been
+              preselected for you.
             </p>
             <EnquiryForm
               defaultEnquiryType={defaultEnquiryType}

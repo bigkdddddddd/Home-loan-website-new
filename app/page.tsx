@@ -3,24 +3,24 @@ import Link from "next/link";
 import { journeyPages } from "@/lib/site-content";
 
 const homeHighlights = [
-  "Dedicated loan pages",
-  "One enquiry page",
-  "Server-only secret handling",
-  "Lead tracking in Supabase",
+  "Home loans",
+  "Car loans",
+  "Refinance",
+  "Business lending",
 ] as const;
 
 const homeProcess = [
   {
-    title: "Explore the right lending path",
-    body: "Visitors can read the dedicated lending pages, then move into one shared enquiry page when they are ready to talk.",
+    title: "Choose the finance category that fits",
+    body: "Browse the lending page that matches your plans, whether you are buying a home, upgrading a vehicle, refinancing, or funding business growth.",
   },
   {
-    title: "Submit through one secure form",
-    body: "Every enquiry passes through the same validated API route, with honeypot spam protection and no browser access to Supabase or Resend secrets.",
+    title: "Share the details that matter",
+    body: "Use one enquiry page to explain your goals, timeframe, estimated amount, and any questions you want to discuss with KM Financing.",
   },
   {
-    title: "Store and notify",
-    body: "The lead is written to Supabase and notification emails are sent from info@kmfinancing.com so the team can follow up quickly.",
+    title: "Receive a relevant follow-up",
+    body: "Your enquiry is recorded with the right service context so KM Financing can respond with a more useful next step.",
   },
 ] as const;
 
@@ -31,12 +31,12 @@ export default function HomePage() {
     <div className="page-stack">
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">KM Financing website build</p>
-          <h1>One secure enquiry page, with clearer finance pathways.</h1>
+          <p className="eyebrow">KM Financing</p>
+          <h1>Finance solutions for property, vehicles and business goals.</h1>
           <p className="lead">
-            This build gives KM Financing dedicated lending pages and a single
-            enquiry page that captures every lead without exposing backend
-            secrets to the browser.
+            KM Financing helps clients explore home loans, car loans,
+            refinance, first-home buyer options, asset finance and business
+            lending through one straightforward enquiry experience.
           </p>
 
           <div className="hero-actions">
@@ -58,24 +58,24 @@ export default function HomePage() {
         </div>
 
         <aside className="panel panel--highlight">
-          <p className="eyebrow">What is included</p>
-          <h2>A simpler path from browsing to enquiry.</h2>
+          <p className="eyebrow">How KM Financing can help</p>
+          <h2>Clear pathways for the finance conversations people actually need.</h2>
           <ul className="checklist">
-            <li>Dedicated pages for the major lending paths.</li>
-            <li>One separate enquiry page for every submission.</li>
-            <li>Server-side lead capture with Supabase and Resend.</li>
-            <li>No Supabase service role key in any client component.</li>
+            <li>Home loans for owner-occupiers and investors.</li>
+            <li>Vehicle and asset finance for personal or business needs.</li>
+            <li>Refinance guidance for clients reviewing current repayments.</li>
+            <li>Business lending conversations with one clear enquiry path.</li>
           </ul>
         </aside>
       </section>
 
       <section className="section" id="solutions">
         <div className="section-heading">
-          <p className="eyebrow">Lending pathways</p>
-          <h2>Dedicated pages for the journeys people search for most.</h2>
+          <p className="eyebrow">Finance solutions</p>
+          <h2>Dedicated pages for the lending paths clients ask about most.</h2>
           <p>
-            Each page explains the lending path clearly, then sends visitors to
-            the main enquiry page when they are ready to submit.
+            Each page focuses on a specific finance need, then guides visitors
+            into the main enquiry page when they are ready to talk.
           </p>
         </div>
 
@@ -95,12 +95,12 @@ export default function HomePage() {
 
       <section className="section section--contrast">
         <div className="section-heading">
-          <p className="eyebrow">Shared submission flow</p>
-          <h2>One secure route, reused by the enquiry page.</h2>
+          <p className="eyebrow">How it works</p>
+          <h2>A simple path from browsing to enquiry.</h2>
           <p>
-            Visitors can start from different pages, but every submission lands
-            in the same validated API workflow before it is inserted into
-            Supabase and emailed through Resend.
+            Clients can explore different loan categories, then send one enquiry
+            that captures the context KM Financing needs for a more useful
+            follow-up.
           </p>
         </div>
 
@@ -118,21 +118,22 @@ export default function HomePage() {
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">Enquiry page</p>
-          <h2>When visitors are ready, send them to one focused form.</h2>
+          <h2>One enquiry page for every finance conversation.</h2>
           <p>
-            The enquiry page works for general contact and loan-specific
-            conversations, while still recording the originating page for
-            cleaner tracking.
+            Whether the question is about a home loan, car loan, refinance,
+            first-home buyer planning or business funding, the same enquiry
+            page keeps the next step clear and consistent.
           </p>
         </div>
 
         <div className="form-card-grid">
           <article className="panel panel--form">
-            <p className="eyebrow">Single form experience</p>
-            <h3>General questions and loan-specific enquiries now use the same page.</h3>
+            <p className="eyebrow">Single enquiry experience</p>
+            <h3>General questions and service-specific enquiries now start in one place.</h3>
             <p>
-              That keeps the homepage lighter, removes duplicate form blocks,
-              and makes the main conversion path much clearer.
+              That makes it easier for visitors to choose a lending category,
+              share their goals, and move into a real conversation with KM
+              Financing.
             </p>
             <div className="hero-actions">
               <Link className="button" href={homeEnquiryHref}>
@@ -148,12 +149,12 @@ export default function HomePage() {
           </article>
 
           <article className="panel">
-            <p className="eyebrow">Tracking stays intact</p>
-            <h3>Source page and enquiry type are still captured cleanly.</h3>
+            <p className="eyebrow">What gets captured</p>
+            <h3>Each enquiry keeps the context needed for a better response.</h3>
             <ul className="checklist">
-              <li>Use `/enquiry` for general contact.</li>
-              <li>Use a prefilled enquiry link from each lending page.</li>
-              <li>All submissions still land in the same secure API route.</li>
+              <li>General questions can start from the main enquiry page.</li>
+              <li>Service pages can preselect the right enquiry type.</li>
+              <li>KM Financing receives the enquiry with the relevant page context.</li>
             </ul>
           </article>
         </div>
