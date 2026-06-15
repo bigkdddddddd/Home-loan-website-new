@@ -107,11 +107,8 @@ export default async function EnquiryPage({ searchParams }: EnquiryPageProps) {
         <div className="enquiry-page__form-header">
           <div>
             <p className="eyebrow">Enquiry form</p>
-            <h2>Keep it simple.</h2>
-            <p>
-              Fill in the form below and KM Financing will use it as the
-              starting point for follow-up.
-            </p>
+            <h2>Contact form.</h2>
+            <p>Fill in your details below to be contacted by KM Financing.</p>
           </div>
           <div className="enquiry-page__focus-badge">{activeEnquiryLabel}</div>
         </div>
