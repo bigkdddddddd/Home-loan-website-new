@@ -11,12 +11,15 @@ export type EmailEnv = {
   kmFinancingNotificationEmail: string;
 };
 
+export type EmailDeliveryMode = "supabase" | "app";
+
 export type ServerEnv = SupabaseEnv & {
   siteUrl: string | null;
 };
 
 let cachedServerEnv: ServerEnv | null = null;
 let cachedEmailEnv: EmailEnv | null | undefined;
+let cachedEmailDeliveryMode: EmailDeliveryMode | null = null;
 
 function readOptionalEnv(name: string): string | null {
   return process.env[name]?.trim() || null;
@@ -117,4 +120,20 @@ export function getEmailEnv(): EmailEnv | null {
   });
 
   return cachedEmailEnv;
+}
+
+export function getEmailDeliveryMode(): EmailDeliveryMode {
+  if (cachedEmailDeliveryMode) {
+    return cachedEmailDeliveryMode;
+  }
+
+  const configuredMode = readOptionalEnv("EMAIL_DELIVERY_MODE");
+
+  if (configuredMode === "app" || configuredMode === "supabase") {
+    cachedEmailDeliveryMode = configuredMode;
+    return cachedEmailDeliveryMode;
+  }
+
+  cachedEmailDeliveryMode = "supabase";
+  return cachedEmailDeliveryMode;
 }

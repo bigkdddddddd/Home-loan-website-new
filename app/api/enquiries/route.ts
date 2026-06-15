@@ -4,7 +4,11 @@ import {
   leadEnquirySchema,
   type LeadEnquiryInput,
 } from "../../../lib/enquiry-schema";
-import { getEmailEnv, type EmailEnv } from "../../../lib/env";
+import {
+  getEmailDeliveryMode,
+  getEmailEnv,
+  type EmailEnv,
+} from "../../../lib/env";
 import { getResend } from "../../../lib/resend";
 import { getSupabaseAdmin } from "../../../lib/supabaseAdmin";
 
@@ -204,7 +208,9 @@ export async function POST(request: Request) {
       });
     }
 
-    const emailEnv = getEmailEnv();
+    const emailDeliveryMode = getEmailDeliveryMode();
+    const emailEnv =
+      emailDeliveryMode === "app" ? getEmailEnv() : null;
     const supabaseAdmin = getSupabaseAdmin();
     const submittedAt = new Date().toISOString();
     const { data: insertedLead, error: insertError } = await supabaseAdmin
@@ -242,7 +248,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (emailEnv) {
+    if (emailDeliveryMode === "app" && emailEnv) {
       try {
         await sendInternalNotificationEmail(enquiry, submittedAt, emailEnv);
       } catch (error) {
@@ -260,10 +266,18 @@ export async function POST(request: Request) {
           error,
         });
       }
-    } else {
+    } else if (emailDeliveryMode === "app") {
       console.warn(
         "Lead enquiry stored without email notifications because Resend is not fully configured.",
         { leadId: insertedLead?.id ?? null },
+      );
+    } else {
+      console.info(
+        "Lead enquiry stored. Supabase webhook email delivery owns notifications for this lead.",
+        {
+          leadId: insertedLead?.id ?? null,
+          emailDeliveryMode,
+        },
       );
     }
 

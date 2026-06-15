@@ -20,6 +20,9 @@ export type Database = {
           status: string;
           user_agent: string | null;
           ip_address: string | null;
+          notification_email_sent_at: string | null;
+          customer_confirmation_sent_at: string | null;
+          email_delivery_error: string | null;
         };
         Insert: {
           id?: string;
@@ -39,6 +42,9 @@ export type Database = {
           status?: string;
           user_agent?: string | null;
           ip_address?: string | null;
+          notification_email_sent_at?: string | null;
+          customer_confirmation_sent_at?: string | null;
+          email_delivery_error?: string | null;
         };
         Update: {
           id?: string;
@@ -58,6 +64,9 @@ export type Database = {
           status?: string;
           user_agent?: string | null;
           ip_address?: string | null;
+          notification_email_sent_at?: string | null;
+          customer_confirmation_sent_at?: string | null;
+          email_delivery_error?: string | null;
         };
         Relationships: [];
       };

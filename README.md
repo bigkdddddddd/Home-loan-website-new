@@ -19,10 +19,11 @@ The most important security rule is preserved throughout the project: do not imp
   - Zod validation
   - Honeypot spam protection
   - Supabase lead storage
-  - Resend notification emails
-  - Optional customer confirmation emails
+  - Optional app-owned Resend notification emails
+  - Optional app-owned customer confirmation emails
 - Server-only Supabase admin client and Resend client
 - SQL migration for `lead_enquiries`
+- Supabase Edge Function for direct Supabase to Resend delivery
 
 ## Local development
 
@@ -48,24 +49,34 @@ The most important security rule is preserved throughout the project: do not imp
 
 1. Create a Supabase project.
 2. Run the SQL migration in `supabase/migrations/202606140001_create_lead_enquiries.sql`.
-3. Add the Supabase URL and service role key to `.env.local`.
-4. Create a Resend API key.
-5. Add the Resend API key to `.env.local`.
-6. Add `RESEND_FROM_EMAIL=info@kmfinancing.com` and `KM_FINANCING_NOTIFICATION_EMAIL=info@kmfinancing.com` to `.env.local`.
-7. Set `NEXT_PUBLIC_SITE_URL` in `.env.local`, then restart the dev server.
-8. Verify the `kmfinancing.com` sending domain inside Resend before using `info@kmfinancing.com`.
-9. Test the enquiry page and confirm the request reaches `/api/enquiries`.
-10. Confirm the lead appears in Supabase and the notification email is received.
+3. Run the SQL migration in `supabase/migrations/202606140002_secure_lead_enquiries_privileges.sql`.
+4. Add the Supabase URL and service role key to `.env.local`.
+5. Set `EMAIL_DELIVERY_MODE=supabase` in `.env.local` to let Supabase own email delivery.
+6. Apply `supabase/migrations/202606150001_add_lead_enquiry_email_delivery_tracking.sql`.
+7. Deploy the Edge Function in `supabase/functions/send-enquiry-emails/index.ts`.
+8. Add these secrets to your Supabase Edge Function environment:
+   - `RESEND_API_KEY`
+   - `RESEND_FROM_EMAIL`
+   - `KM_FINANCING_NOTIFICATION_EMAIL`
+   - `ENQUIRY_WEBHOOK_SECRET` (recommended)
+9. Verify the sending domain inside Resend before using `RESEND_FROM_EMAIL`.
+10. Run `supabase/sql/create_enquiry_email_webhook.sql` after replacing the project ref and webhook secret placeholders.
+11. Set `NEXT_PUBLIC_SITE_URL` in `.env.local`, then restart the dev server.
+12. Test the enquiry page and confirm the request reaches `/api/enquiries`.
+13. Confirm the lead appears in Supabase and the notification emails are received.
 
 ## Environment variables
 
 - Required for lead storage:
   - `NEXT_PUBLIC_SUPABASE_URL` or `SUPABASE_URL`
   - `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_SECRET_KEY`
-- Optional for email sending:
+- Optional for app-owned email sending fallback:
+  - `EMAIL_DELIVERY_MODE`
   - `RESEND_API_KEY`
   - `RESEND_FROM_EMAIL`
   - `KM_FINANCING_NOTIFICATION_EMAIL`
+
+When `EMAIL_DELIVERY_MODE=supabase` (the default), the web app only stores the lead and Supabase handles email delivery through the Edge Function webhook flow.
 
 If Resend is not configured yet, the form will still store the lead in Supabase and skip the email sends.
 
