@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { ENQUIRY_TYPES, type LeadEnquiryInput } from "@/lib/enquiry-schema";
@@ -52,9 +51,6 @@ export default async function EnquiryPage({ searchParams }: EnquiryPageProps) {
   const sourcePage = sanitizeSourcePage(
     getSingleValue(params.source) ?? fallbackSourcePage,
   );
-  const relatedPages = journeyPages
-    .filter((page) => page.slug !== matchingJourney?.slug)
-    .slice(0, 3);
   const activeEnquiryLabel = defaultEnquiryType ?? "General enquiry";
 
   return (
@@ -126,41 +122,6 @@ export default async function EnquiryPage({ searchParams }: EnquiryPageProps) {
           sourcePage={sourcePage}
           submitLabel="Send enquiry"
         />
-      </section>
-
-      <section className="enquiry-page__support">
-        <article className="panel">
-          <p className="eyebrow">What helps most</p>
-          <h2>Three details that make the follow-up easier.</h2>
-          <ul className="checklist">
-            <li>Your main finance goal and preferred timing.</li>
-            <li>The loan type, purchase, or funding scenario you want to discuss.</li>
-            <li>Any budget, deposit, equity, repayment or borrowing context that may help.</li>
-          </ul>
-        </article>
-
-        <article className="panel">
-          <p className="eyebrow">Need a refresher?</p>
-          <h2>Explore the service pages before you submit.</h2>
-          <div className="related-links">
-            {relatedPages.map((page) => (
-              <Link key={page.slug} href={`/${page.slug}`}>
-                <strong>{page.label}</strong>
-                <span>{page.teaser}</span>
-              </Link>
-            ))}
-          </div>
-        </article>
-
-        <article className="panel">
-          <p className="eyebrow">Good to know</p>
-          <h2>One enquiry page for every service.</h2>
-          <p>
-            Whether your question is about property, vehicles, refinance or
-            business funding, this page keeps the enquiry process clear and
-            consistent.
-          </p>
-        </article>
       </section>
     </div>
   );

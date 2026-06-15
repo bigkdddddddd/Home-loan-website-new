@@ -3,7 +3,8 @@ import { Fraunces, Manrope } from "next/font/google";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { journeyPages, primaryNav } from "@/lib/site-content";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { primaryNav } from "@/lib/site-content";
 
 import "./globals.css";
 
@@ -29,8 +30,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const currentYear = new Date().getFullYear();
-
   return (
     <html lang="en">
       <body className={`${body.variable} ${display.variable}`}>
@@ -62,47 +61,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </header>
 
           <main className="site-main">{children}</main>
-
-          <footer className="site-footer">
-            <div className="footer-grid">
-              <div className="panel">
-                <p className="eyebrow">KM Financing</p>
-                <h2>Finance support across key lending needs.</h2>
-                <p>
-                  Explore home loans, car loans, refinance, first-home buyer
-                  guidance, asset finance and business lending through one clear
-                  enquiry path.
-                </p>
-              </div>
-
-              <div className="panel">
-                <p className="eyebrow">Explore</p>
-                <div className="footer-links">
-                  {journeyPages.map((page) => (
-                    <Link key={page.slug} href={`/${page.slug}`}>
-                      {page.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="panel">
-                <p className="eyebrow">Important note</p>
-                <p>
-                  Submitting any form on this site does not guarantee approval.
-                  Loan outcomes remain subject to lender criteria, assessment,
-                  terms and conditions.
-                </p>
-                <Link className="text-link" href="/enquiry">
-                  Open the enquiry page
-                </Link>
-              </div>
-            </div>
-
-            <p className="footer-meta">
-              Copyright {currentYear} KM Financing. General information only.
-            </p>
-          </footer>
+          <SiteFooter />
         </div>
       </body>
     </html>

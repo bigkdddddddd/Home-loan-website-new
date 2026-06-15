@@ -459,6 +459,12 @@ ul {
   gap: 1rem;
 }
 
+.site-footer--minimal {
+  width: min(calc(100% - 2rem), 980px);
+  margin-top: 0;
+  align-items: center;
+}
+
 .footer-meta {
   text-align: center;
   font-size: 0.92rem;
@@ -563,12 +569,6 @@ ul {
 .enquiry-page__form-section .button {
   width: 100%;
   min-height: 3.2rem;
-}
-
-.enquiry-page__support {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
 }
 
 .empty-state {
@@ -717,8 +717,7 @@ ul {
     position: static;
   }
 
-  .enquiry-page__guide,
-  .enquiry-page__support {
+  .enquiry-page__guide {
     grid-template-columns: 1fr;
   }
 
