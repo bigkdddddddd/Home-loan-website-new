@@ -464,6 +464,113 @@ ul {
   font-size: 0.92rem;
 }
 
+.enquiry-page {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.enquiry-page__hero {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.enquiry-page__intro {
+  max-width: 60ch;
+  padding: 0.25rem 0.15rem 0;
+}
+
+.enquiry-page__guide {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.enquiry-page__guide-card {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1.15rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 36px rgba(16, 37, 59, 0.08);
+}
+
+.enquiry-page__guide-card h2 {
+  font-size: 1.15rem;
+  line-height: 1.15;
+}
+
+.enquiry-page__guide-step {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(16, 37, 59, 0.9);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.enquiry-page__guide-card--focus {
+  display: block;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 245, 237, 0.94));
+}
+
+.enquiry-page__guide-card--focus .eyebrow {
+  margin-bottom: 0.55rem;
+}
+
+.enquiry-page__form-section {
+  padding: 1.8rem;
+}
+
+.enquiry-page__form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.enquiry-page__form-header h2 {
+  margin-bottom: 0.55rem;
+}
+
+.enquiry-page__focus-badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(183, 137, 67, 0.12);
+  border: 1px solid rgba(183, 137, 67, 0.24);
+  color: var(--accent-deep);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.enquiry-page__form-section .enquiry-form {
+  margin-top: 1.6rem;
+}
+
+.enquiry-page__form-section .button {
+  width: 100%;
+  min-height: 3.2rem;
+}
+
+.enquiry-page__support {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .empty-state {
   text-align: center;
   padding: 3rem 1.5rem;
@@ -609,6 +716,15 @@ ul {
   .content-sidebar {
     position: static;
   }
+
+  .enquiry-page__guide,
+  .enquiry-page__support {
+    grid-template-columns: 1fr;
+  }
+
+  .enquiry-page__form-header {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 720px) {
@@ -634,5 +750,13 @@ ul {
 
   .enquiry-form__full {
     grid-column: auto;
+  }
+
+  .enquiry-page__form-section {
+    padding: 1.2rem;
+  }
+
+  .enquiry-page__guide-card {
+    padding: 1rem;
   }
 }
